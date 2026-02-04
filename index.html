@@ -3,7 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Truyện MA Animated - Official Gallery</title>
+    
+    <title>Truyện MA Animated Official - Kho Video Kể Chuyện Kinh Dị Hay Nhất</title>
+    <meta name="description" content="Tổng hợp video truyện ma, chuyện tâm linh có thật và các video kinh dị rùng rợn độc quyền. Kênh chính thức của Truyện MA. Xem ngay các tập mới nhất!">
+    <meta name="keywords" content="truyện ma, kể chuyện ma, video kinh dị, horror stories, phim ma, truyện ma có thật, video truyện ma, tâm linh">
+    <meta name="author" content="Truyện MA Animated Official">
+    <meta name="robots" content="index, follow"> 
+    <link rel="canonical" href="https://peter2089.github.io/truyenma/" /> 
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://peter2089.github.io/truyenma/">
+    <meta property="og:title" content="Truyện MA Animated Official - Video Kinh Dị Độc Quyền">
+    <meta property="og:description" content="Trải nghiệm những câu chuyện ma rùng rợn và ám ảnh nhất. Xem ngay tại website chính thức!">
+    <meta property="og:image" content="https://github.com/Peter2089/truyenma/blob/main/logo.jpeg?raw=true"> 
+    <meta property="og:locale" content="vi_VN">
+
+    <link rel="icon" type="image/png" href="https://github.com/Peter2089/truyenma/blob/main/logo.jpeg?raw=true">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoGallery",
+      "name": "Truyện MA Gallery",
+      "description": "Thư viện tổng hợp các video kể chuyện ma và nội dung kinh dị.",
+      "url": "https://peter2089.github.io/truyenma/",
+      "author": {
+        "@type": "Person",
+        "name": "Truyện MA Animated Official",
+        "url": "https://www.facebook.com/truyenmaanimated"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.youtube.com/@truyenmaAnimated/search?query={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
     <style>
         /* --- GIAO DIỆN TỐI (DARK MODE) --- */
         body {
@@ -12,6 +48,7 @@
             color: #e0e0e0;
             margin: 0;
             padding: 0;
+            line-height: 1.6; 
         }
         header {
             background-color: #1f1f1f;
@@ -44,6 +81,8 @@
             transition: transform 0.2s;
             cursor: pointer;
             box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
         }
         .video-card:hover {
             transform: translateY(-5px);
@@ -72,7 +111,7 @@
         .play-icon::after {
             content: '▶'; color: white; font-size: 20px; margin-left: 4px;
         }
-        .video-info { padding: 15px; }
+        .video-info { padding: 15px; flex-grow: 1; }
         .video-title {
             font-size: 1rem;
             font-weight: 600;
@@ -82,6 +121,7 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
             height: 2.8em;
+            color: #fff; 
         }
         .video-date { font-size: 0.8rem; color: #888; }
         
@@ -127,24 +167,25 @@
 <body>
 
     <header>
-        <h1>Truyện MA Animated</h1>
-        <div class="subtitle">Trang Web Chính Thức của Truyện Ma Animated</div>
+        <h1>Truyện MA Animated Official</h1>
+        <div class="subtitle">Kênh Kể Chuyện Ma & Video Kinh Dị Độc Quyền</div>
         <div style="margin-top:10px;">
-            <a href="https://youtube.com/@truyenmaAnimated" style="color:#fff; text-decoration:none; border:1px solid #fff; padding:5px 15px; border-radius:20px; font-size:0.8rem;">
-                Official Youtube Channel
+            <a href="https://youtube.com/@truyenmaAnimated" target="_blank" rel="noopener noreferrer" style="color:#fff; text-decoration:none; border:1px solid #fff; padding:5px 15px; border-radius:20px; font-size:0.8rem;">
+                YouTube Channel
             </a>            
-            <a href="https://www.facebook.com/truyenmaanimated" style="color:#fff; text-decoration:none; border:1px solid #fff; padding:5px 15px; border-radius:20px; font-size:0.8rem;">
-                Official Facebook Page
+            <a href="https://www.facebook.com/truyenmaanimated" target="_blank" rel="noopener noreferrer" style="color:#fff; text-decoration:none; border:1px solid #fff; padding:5px 15px; border-radius:20px; font-size:0.8rem;">
+                Facebook Fanpage
             </a>
         </div>
     </header>
 
-    <div class="container">
-        <h2 style="border-left: 5px solid red; padding-left: 10px; margin-top: 0;">YouTube Videos</h2>
+    <main class="container">
+        <h2 style="border-left: 5px solid red; padding-left: 10px; margin-top: 0;">Danh Sách Video Mới Nhất</h2>
+        
         <div class="video-grid" id="video-grid">
             </div>
         <button id="load-more" class="hidden">Xem thêm video cũ hơn</button>
-    </div>
+    </main>
 
     <section style="background: #1a1a1a; padding: 60px 20px; border-top: 1px solid #333; margin-top: 50px;">
         <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
@@ -153,7 +194,7 @@
                 Kết nối với chúng tôi trên Facebook
             </h2>
             <p style="color: #aaa; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                Theo dõi Fanpage chính thức để cập nhật các tập phim ngắn (Reels) độc quyền và tham gia cộng đồng.
+                Theo dõi Fanpage chính thức để cập nhật các video (Reels) ngắn rùng rợn và tham gia cộng đồng yêu thích truyện ma.
             </p>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
@@ -161,28 +202,31 @@
                 <div style="background: #000; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
                     <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https://www.facebook.com/reel/845722411826011/?s=fb_shorts_profile&stack_idx=0&show_text=false&width=476&t=0" 
                         width="100%" height="500" style="border:none; overflow:hidden" scrolling="no" frameborder="0" 
-                        allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                        allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                        title="Facebook Video 1"> 
                     </iframe>
                 </div>
 
                 <div style="background: #000; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
                     <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https://www.facebook.com/reel/929920546126893/?s=fb_shorts_profile&stack_idx=0&show_text=false&width=476&t=0" 
                         width="100%" height="500" style="border:none; overflow:hidden" scrolling="no" frameborder="0" 
-                        allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                        allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                        title="Facebook Video 2">
                     </iframe>
                 </div>
 
                 <div style="background: #000; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
                     <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https://www.facebook.com/reel/3275313665979310/?s=fb_shorts_profile&stack_idx=0&show_text=false&width=476&t=0" 
                         width="100%" height="500" style="border:none; overflow:hidden" scrolling="no" frameborder="0" 
-                        allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                        allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                        title="Facebook Video 3">
                     </iframe>
                 </div>
 
             </div>
 
             <br><br>
-            <a href="https://www.facebook.com/truyenmaanimated/" target="_blank" 
+            <a href="https://www.facebook.com/truyenmaanimated/" target="_blank" rel="noopener noreferrer"
                style="background: #1877f2; color: #fff; padding: 15px 40px; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 1.1rem; transition: 0.3s; display: inline-block;">
                👍 Theo dõi Fanpage Ngay
             </a>
@@ -192,12 +236,12 @@
     <div id="video-modal" class="modal">
         <span class="close-btn" onclick="closeModal()">&times;</span>
         <div class="modal-content">
-            <iframe id="youtube-player" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <iframe id="youtube-player" src="" allow="autoplay; encrypted-media" allowfullscreen title="YouTube Video Player"></iframe>
         </div>
     </div>
 
     <footer>
-        &copy; 2024 Truyện MA Animated. All rights reserved.<br>
+        &copy; 2024 Truyện MA Animated Official. All rights reserved.<br>
         Content protected by Rights Manager.
     </footer>
 
@@ -206,7 +250,6 @@
         const API_KEY = 'AIzaSyAR9L_nDjcepwxhCc0XV-EfwADIvmqyW2k'; 
         const CHANNEL_ID = 'UClQDZBbaJepp5kha5JaUZ-A'; 
         
-        // Thời gian lưu cache (3600000 ms = 1 tiếng)
         const CACHE_DURATION = 3600000; 
         const CACHE_KEY = 'truyenma_video_cache';
 
@@ -215,7 +258,6 @@
         const grid = document.getElementById('video-grid');
         const loadMoreBtn = document.getElementById('load-more');
 
-        // Hàm lưu dữ liệu vào LocalStorage
         function saveToCache(items, token) {
             const data = {
                 timestamp: Date.now(),
@@ -225,7 +267,6 @@
             localStorage.setItem(CACHE_KEY, JSON.stringify(data));
         }
 
-        // Hàm lấy dữ liệu từ LocalStorage
         function getFromCache() {
             const json = localStorage.getItem(CACHE_KEY);
             if (!json) return null;
@@ -233,7 +274,6 @@
             const data = JSON.parse(json);
             const now = Date.now();
 
-            // Nếu dữ liệu quá cũ (quá 1 tiếng) -> Xóa đi, trả về null để gọi API mới
             if (now - data.timestamp > CACHE_DURATION) {
                 localStorage.removeItem(CACHE_KEY);
                 return null;
@@ -247,8 +287,6 @@
                 return;
             }
 
-            // --- KIỂM TRA CACHE TRƯỚC KHI GỌI API ---
-            // Chỉ dùng cache cho lần tải đầu tiên (không phải nút Load More)
             if (!isLoadMore) {
                 const cachedData = getFromCache();
                 if (cachedData) {
@@ -256,10 +294,9 @@
                     displayVideos(cachedData.items);
                     nextPageToken = cachedData.nextPageToken || '';
                     if (nextPageToken) loadMoreBtn.classList.remove('hidden');
-                    return; // Dừng hàm, không gọi API nữa
+                    return; 
                 }
             }
-            // -----------------------------------------
 
             console.log("📡 Đang gọi API YouTube (Tốn 1 Quota)...");
             const maxResults = 12;
@@ -277,7 +314,6 @@
                 displayVideos(data.items);
                 nextPageToken = data.nextPageToken || '';
 
-                // Nếu là lần tải đầu tiên -> Lưu vào Cache
                 if (!isLoadMore) {
                     saveToCache(data.items, nextPageToken);
                 }
@@ -297,17 +333,16 @@
             videos.forEach(item => {
                 const videoId = item.snippet.resourceId.videoId;
                 const title = item.snippet.title;
-                // Xử lý trường hợp không có ảnh medium
                 const thumb = item.snippet.thumbnails.medium?.url || item.snippet.thumbnails.default?.url;
                 const date = new Date(item.snippet.publishedAt).toLocaleDateString('vi-VN');
 
                 if (!thumb) return;
 
-                const card = document.createElement('div');
+                const card = document.createElement('article');
                 card.className = 'video-card';
                 card.innerHTML = `
                     <div class="thumbnail-container">
-                        <img src="${thumb}" class="thumbnail-image" alt="${title}" loading="lazy">
+                        <img src="${thumb}" class="thumbnail-image" alt="${title} - Truyện MA Animated Official" loading="lazy">
                         <div class="play-icon"></div>
                     </div>
                     <div class="video-info">
@@ -337,10 +372,8 @@
             if (event.target == modal) closeModal();
         }
 
-        // Gán sự kiện
         loadMoreBtn.addEventListener('click', () => fetchVideos(true));
         
-        // Chạy lần đầu
         fetchVideos(false);
 
     </script>
