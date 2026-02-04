@@ -159,21 +159,64 @@
         const API_KEY = 'AIzaSyAR9L_nDjcepwxhCc0XV-EfwADIvmqyW2k'; 
         const CHANNEL_ID = 'UClQDZBbaJepp5kha5JaUZ-A'; // Ví dụ: UCVz...
         
-        // Tự động chuyển Channel ID (UC...) thành Uploads Playlist ID (UU...)
+// Thời gian lưu cache (Ví dụ: 3600000 ms = 1 tiếng)
+        // Nghĩa là trong 1 tiếng, dù khách F5 bao nhiêu lần cũng không tốn quota
+        const CACHE_DURATION = 3600000; 
+        const CACHE_KEY = 'truyenma_video_cache';
+
         const PLAYLIST_ID = CHANNEL_ID.replace(/^UC/, 'UU'); 
-        
         let nextPageToken = '';
         const grid = document.getElementById('video-grid');
         const loadMoreBtn = document.getElementById('load-more');
 
-        // Hàm lấy video từ API
-        async function fetchVideos() {
+        // Hàm lưu dữ liệu vào LocalStorage
+        function saveToCache(items, token) {
+            const data = {
+                timestamp: Date.now(),
+                items: items,
+                nextPageToken: token
+            };
+            localStorage.setItem(CACHE_KEY, JSON.stringify(data));
+        }
+
+        // Hàm lấy dữ liệu từ LocalStorage
+        function getFromCache() {
+            const json = localStorage.getItem(CACHE_KEY);
+            if (!json) return null;
+            
+            const data = JSON.parse(json);
+            const now = Date.now();
+
+            // Nếu dữ liệu quá cũ (quá 1 tiếng) -> Xóa đi, trả về null để gọi API mới
+            if (now - data.timestamp > CACHE_DURATION) {
+                localStorage.removeItem(CACHE_KEY);
+                return null;
+            }
+            return data;
+        }
+
+        async function fetchVideos(isLoadMore = false) {
             if (!API_KEY.startsWith('AIza')) {
-                grid.innerHTML = '<p style="text-align:center; color:red;">⚠️ Chưa nhập API Key hoặc API Key sai.</p>';
+                grid.innerHTML = '<p style="text-align:center; color:red;">⚠️ API Key chưa đúng.</p>';
                 return;
             }
 
-            const maxResults = 12; // Số video load mỗi lần
+            // --- KIỂM TRA CACHE TRƯỚC KHI GỌI API ---
+            // Chỉ dùng cache cho lần tải đầu tiên (không phải nút Load More)
+            if (!isLoadMore) {
+                const cachedData = getFromCache();
+                if (cachedData) {
+                    console.log("⚡ Dùng dữ liệu từ Cache (Không tốn Quota)");
+                    displayVideos(cachedData.items);
+                    nextPageToken = cachedData.nextPageToken || '';
+                    if (nextPageToken) loadMoreBtn.classList.remove('hidden');
+                    return; // Dừng hàm, không gọi API nữa
+                }
+            }
+            // -----------------------------------------
+
+            console.log("📡 Đang gọi API YouTube (Tốn 1 Quota)...");
+            const maxResults = 12;
             const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${PLAYLIST_ID}&maxResults=${maxResults}&key=${API_KEY}&pageToken=${nextPageToken}`;
 
             try {
@@ -181,15 +224,18 @@
                 const data = await response.json();
 
                 if (data.error) {
-                    console.error('Lỗi API:', data.error);
-                    alert('Lỗi tải video. Kiểm tra Console (F12) để xem chi tiết.');
+                    console.error('Lỗi:', data.error);
                     return;
                 }
 
                 displayVideos(data.items);
-
-                // Xử lý phân trang (Nút Load More)
                 nextPageToken = data.nextPageToken || '';
+
+                // Nếu là lần tải đầu tiên -> Lưu vào Cache
+                if (!isLoadMore) {
+                    saveToCache(data.items, nextPageToken);
+                }
+
                 if (nextPageToken) {
                     loadMoreBtn.classList.remove('hidden');
                 } else {
@@ -201,22 +247,21 @@
             }
         }
 
-        // Hàm hiển thị video ra giao diện
         function displayVideos(videos) {
             videos.forEach(item => {
                 const videoId = item.snippet.resourceId.videoId;
                 const title = item.snippet.title;
-                const thumb = item.snippet.thumbnails.high?.url || item.snippet.thumbnails.medium.url;
+                // Xử lý trường hợp không có ảnh medium
+                const thumb = item.snippet.thumbnails.medium?.url || item.snippet.thumbnails.default?.url;
                 const date = new Date(item.snippet.publishedAt).toLocaleDateString('vi-VN');
 
-                // Bỏ qua các video đã bị xóa/riêng tư (không có thumbnails)
-                if (!item.snippet.thumbnails) return;
+                if (!thumb) return;
 
                 const card = document.createElement('div');
                 card.className = 'video-card';
                 card.innerHTML = `
                     <div class="thumbnail-container">
-                        <img src="${thumb}" class="thumbnail-image" alt="${title}">
+                        <img src="${thumb}" class="thumbnail-image" alt="${title}" loading="lazy">
                         <div class="play-icon"></div>
                     </div>
                     <div class="video-info">
@@ -224,14 +269,11 @@
                         <div class="video-date">📅 ${date}</div>
                     </div>
                 `;
-                
-                // Click vào thì mở Modal
                 card.onclick = () => openModal(videoId);
                 grid.appendChild(card);
             });
         }
 
-        // Xử lý Modal (Popup xem video)
         const modal = document.getElementById('video-modal');
         const player = document.getElementById('youtube-player');
 
@@ -242,19 +284,18 @@
 
         function closeModal() {
             modal.style.display = 'none';
-            player.src = ''; // Tắt video
+            player.src = '';
         }
 
-        // Đóng modal khi click ra ngoài
         window.onclick = function(event) {
-            if (event.target == modal) {
-                closeModal();
-            }
+            if (event.target == modal) closeModal();
         }
 
+        // Gán sự kiện
+        loadMoreBtn.addEventListener('click', () => fetchVideos(true));
+        
         // Chạy lần đầu
-        loadMoreBtn.addEventListener('click', fetchVideos);
-        fetchVideos();
+        fetchVideos(false);
 
     </script>
 </body>
