@@ -121,7 +121,7 @@
             color: #fff; font-size: 40px; font-weight: bold;
             cursor: pointer;
         }
-        footer { text-align: center; padding: 20px; color: #666; font-size: 0.8rem; border-top: 1px solid #333; margin-top: 40px;}
+        footer { text-align: center; padding: 20px; color: #666; font-size: 0.8rem; border-top: 1px solid #333; margin-top: 0;}
     </style>
 </head>
 <body>
@@ -140,10 +140,54 @@
     </header>
 
     <div class="container">
+        <h2 style="border-left: 5px solid red; padding-left: 10px; margin-top: 0;">YouTube Videos</h2>
         <div class="video-grid" id="video-grid">
             </div>
         <button id="load-more" class="hidden">Xem thêm video cũ hơn</button>
     </div>
+
+    <section style="background: #1a1a1a; padding: 60px 20px; border-top: 1px solid #333; margin-top: 50px;">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+            
+            <h2 style="color: #1877f2; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">
+                Kết nối với chúng tôi trên Facebook
+            </h2>
+            <p style="color: #aaa; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Theo dõi Fanpage chính thức để cập nhật các tập phim ngắn (Reels) độc quyền và tham gia cộng đồng.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                
+                <div style="background: #000; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+                    <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https://www.facebook.com/reel/845722411826011/?s=fb_shorts_profile&stack_idx=0&show_text=false&width=476&t=0" 
+                        width="100%" height="500" style="border:none; overflow:hidden" scrolling="no" frameborder="0" 
+                        allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                    </iframe>
+                </div>
+
+                <div style="background: #000; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+                    <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https://www.facebook.com/reel/929920546126893/?s=fb_shorts_profile&stack_idx=0&show_text=false&width=476&t=0" 
+                        width="100%" height="500" style="border:none; overflow:hidden" scrolling="no" frameborder="0" 
+                        allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                    </iframe>
+                </div>
+
+                <div style="background: #000; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+                    <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https://www.facebook.com/reel/3275313665979310/?s=fb_shorts_profile&stack_idx=0&show_text=false&width=476&t=0" 
+                        width="100%" height="500" style="border:none; overflow:hidden" scrolling="no" frameborder="0" 
+                        allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                    </iframe>
+                </div>
+
+            </div>
+
+            <br><br>
+            <a href="LINK_FANPAGE_CUA_BAN" target="_blank" 
+               style="background: #1877f2; color: #fff; padding: 15px 40px; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 1.1rem; transition: 0.3s; display: inline-block;">
+               👍 Theo dõi Fanpage Ngay
+            </a>
+        </div>
+    </section>
 
     <div id="video-modal" class="modal">
         <span class="close-btn" onclick="closeModal()">&times;</span>
@@ -160,10 +204,9 @@
     <script>
         // --- CẤU HÌNH (THAY ĐỔI Ở ĐÂY) ---
         const API_KEY = 'AIzaSyAR9L_nDjcepwxhCc0XV-EfwADIvmqyW2k'; 
-        const CHANNEL_ID = 'UClQDZBbaJepp5kha5JaUZ-A'; // Ví dụ: UCVz...
+        const CHANNEL_ID = 'UClQDZBbaJepp5kha5JaUZ-A'; 
         
-// Thời gian lưu cache (Ví dụ: 3600000 ms = 1 tiếng)
-        // Nghĩa là trong 1 tiếng, dù khách F5 bao nhiêu lần cũng không tốn quota
+        // Thời gian lưu cache (3600000 ms = 1 tiếng)
         const CACHE_DURATION = 3600000; 
         const CACHE_KEY = 'truyenma_video_cache';
 
